@@ -2,7 +2,7 @@
 # Dockerfile for shadowsocks-libev
 #
 
-FROM alpine
+FROM alpine:3.4 
 MAINTAINER kev <noreply@datageek.info>
 
 ARG SS_VER=3.0.8
