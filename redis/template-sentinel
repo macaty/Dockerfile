@@ -1,0 +1,4 @@
+dir "/tmp"
+port 26379
+sentinel down-after-milliseconds mymaster 3000
+sentinel failover-timeout mymaster 180
