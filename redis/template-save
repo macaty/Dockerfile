@@ -7,9 +7,7 @@ daemonize no
 supervised no
 loglevel notice
 databases 16
-save 900 1
-save 300 10
-save 60 10000
+save ""
 dir /data
 stop-writes-on-bgsave-error yes
 rdbcompression no
@@ -17,8 +15,7 @@ rdbchecksum no
 slave-serve-stale-data yes
 slave-read-only yes
 slave-priority 100
-appendonly no
-appendfilename "appendonly.aof"
+appendonly yes
 appendfsync everysec
 no-appendfsync-on-rewrite no
 auto-aof-rewrite-percentage 100
