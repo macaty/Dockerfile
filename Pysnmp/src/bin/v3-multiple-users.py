@@ -86,7 +86,7 @@ def cbFun(snmpEngine,
       logger.info(msg)
       logger.info("send alert message".center(50,"#"))
       for phone_number in smslist:
-        response = SMS_Send(api,phone_number,"%s\n%s"%(subject,msg))
+        response = SMS_Send(api,phone_number,"%s\n%s"%(subject,msg),timeout=5)
         sms_result = response.get('msg')
         if sms_result == 'ok':
           logger.info("%s send ok" %(phone_number))
