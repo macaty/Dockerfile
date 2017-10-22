@@ -84,20 +84,22 @@ def cbFun(snmpEngine,
     if name.prettyPrint() == oid:
       msg=val.prettyPrint()
       logger.info(msg)
-      logger.info("send alert message".center(50,"#"))
-      for phone_number in smslist:
-        response = SMS_Send(api,phone_number,"%s\n%s"%(subject,msg),timeout=5)
-        sms_result = response.get('msg')
-        if sms_result == 'ok':
-          logger.info("%s send ok" %(phone_number))
+      if not msg.__cotains__('Patrol'):
+        logger.info("send alert message".center(50,"#"))
+        for phone_number in smslist:
+          response = SMS_Send(api,phone_number,"%s\n%s"%(subject,msg),timeout=5)
+          sms_result = response.get('msg')
+          if sms_result == 'ok':
+            logger.info("%s send ok" %(phone_number))
+          else:
+            logger.warn("%s send error,msg:%s" %(phone_number,sms_result))
+        smtp_result = Send_mail.Send_txt_mail(emaillist, msg, subject)
+        if smtp_result.get('status'):
+          logger.info("send email ok")
         else:
-          logger.warn("%s send error,msg:%s" %(phone_number,sms_result))
-      smtp_result = Send_mail.Send_txt_mail(emaillist, msg, subject)
-      if smtp_result.get('status'):
-        logger.info("send email ok")
+          logger.warn("send email error %s"%(smtp_result.get('error')))
       else:
-        logger.warn("send email error %s"%(smtp_result.get('error')))
-
+        logger.info("ingore msg: %s") %(msg,)
 # Register SNMP Application at the SNMP engine
 ntfrcv.NotificationReceiver(snmpEngine, cbFun)
 
