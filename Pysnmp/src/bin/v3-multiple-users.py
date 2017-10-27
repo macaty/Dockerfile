@@ -84,7 +84,7 @@ def cbFun(snmpEngine,
     if name.prettyPrint() == oid:
       msg=val.prettyPrint()
       logger.info(msg)
-      if not msg.__cotains__('Patrol'):
+      if not msg.__contains__('Patrol'):
         logger.info("send alert message".center(50,"#"))
         for phone_number in smslist:
           response = SMS_Send(api,phone_number,"%s\n%s"%(subject,msg),timeout=5)
