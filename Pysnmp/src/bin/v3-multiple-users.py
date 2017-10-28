@@ -99,7 +99,7 @@ def cbFun(snmpEngine,
         else:
           logger.warn("send email error %s"%(smtp_result.get('error')))
       else:
-        logger.info("ingore msg: %s") %(msg,)
+        logger.info("ingore msg: %s" %(msg))
 # Register SNMP Application at the SNMP engine
 ntfrcv.NotificationReceiver(snmpEngine, cbFun)
 
