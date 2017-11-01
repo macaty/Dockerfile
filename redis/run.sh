@@ -4,12 +4,12 @@ configfile="/etc/redis.conf"
 defaultport=6379
 function start_master(){
   cp -a ${template} ${configfile}
-  redis-server ${configfile} --appendfilename "${HOSTNAME}.aof"
+  redis-server ${configfile} --appendfilename "${HOSTNAME}.aof" --dbfilename "${HOSTNAME}.rdb"
 }
 
 function start_slave(){
   cp -a ${template} ${configfile}
-  redis-server ${configfile} --slaveof $1 ${defaultport} --appendfilename "${HOSTNAME}.aof"
+  redis-server ${configfile} --slaveof $1 ${defaultport} --appendfilename "${HOSTNAME}.aof" --dbfilename "${HOSTNAME}.rdb"
 }
 
 
