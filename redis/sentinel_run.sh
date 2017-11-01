@@ -5,6 +5,7 @@ function start(){
 }
 
 cat >> ${configfile} << EOF
+dir "/data"
 port 26379
 sentinel monitor mymaster ${master_ip} ${master_port} ${vote}
 sentinel down-after-milliseconds mymaster 3000
